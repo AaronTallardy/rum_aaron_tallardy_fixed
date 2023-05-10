@@ -5,13 +5,13 @@ pub mod functions;
 fn main() {
         let input = env::args().nth(1);
         let instructions = load(input.as_deref());
-        println!("{} instructions", instructions.len());
+        //println!("{} instructions", instructions.len());
         let mut um = execute::Um::new();
         um.mem_segs.push(instructions.clone());
         while true {
             
             um.execute(um.mem_segs[0][um.program_counter as usize]);
-            print!("total intstructions: {}", um.program_counter);
+            //print!("total intstructions: {}", um.program_counter);
         }
         
         
