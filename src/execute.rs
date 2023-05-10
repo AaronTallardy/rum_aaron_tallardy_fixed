@@ -9,12 +9,12 @@ pub struct Field {
     lsb: u32,
     }
     
-static RA: Field = Field {width: 3, lsb: 6};
-static RB: Field = Field {width: 3, lsb: 3};
-static RC: Field = Field {width: 3, lsb: 0};
-static RL: Field = Field {width: 3, lsb: 25};
-static VL: Field = Field {width: 25, lsb: 0};
-static OP: Field = Field {width: 4, lsb: 28};
+const RA: Field = Field {width: 3, lsb: 6};
+const RB: Field = Field {width: 3, lsb: 3};
+const RC: Field = Field {width: 3, lsb: 0};
+const RL: Field = Field {width: 3, lsb: 25};
+const VL: Field = Field {width: 25, lsb: 0};
+const OP: Field = Field {width: 4, lsb: 28};
 
 pub struct Um {
     pub regs: Vec<u32>,
