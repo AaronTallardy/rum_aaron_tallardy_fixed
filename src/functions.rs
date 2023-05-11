@@ -16,7 +16,14 @@ pub fn seg_load(umi: &mut Um, a: u32, b: u32, c: u32){
     //eprintln!("seg_load: program counter{} , inst_counter{}", umi.program_counter, umi.inst_counter);
     //println!("seg_load");
     //eprintln!("loading segment {} offsett at {} into {}", umi.regs[b as usize], umi.regs[c as usize], umi.regs[a as usize]);
-    umi.regs[a as usize] = umi.mem_segs[umi.regs[b as usize] as usize][umi.regs[c as usize] as usize];
+    let b_val = umi.regs[b as usize] as usize;
+    let c_val = umi.regs[c as usize] as usize;
+    let mem_segs = &mut umi.mem_segs;
+    let a_reg = a as usize;
+
+    umi.regs[a_reg] = mem_segs[b_val][c_val];
+
+    //umi.regs[a as usize] = umi.mem_segs[umi.regs[b as usize] as usize][umi.regs[c as usize] as usize];
     umi.program_counter += 1;
     umi.inst_counter += 1;
 }
