@@ -34,23 +34,10 @@ impl Um{
             inst_counter: 0
         }
     }
-    //pub fn mask(&self, bits: u32) -> u32 { (1 << bits) - 1 }
-
-    /* pub fn get(&self, field: &Field, inst: u32) -> u32 {
-        (inst >> field.lsb) & self.mask(field.width)
-    } */
-    const MASKS: [u32; 33] = [
-        0x0000_0000, 0x0000_0001, 0x0000_0003, 0x0000_0007, 0x0000_000f, 0x0000_001f, 0x0000_003f,
-        0x0000_007f, 0x0000_00ff, 0x0000_01ff, 0x0000_03ff, 0x0000_07ff, 0x0000_0fff, 0x0000_1fff,
-        0x0000_3fff, 0x0000_7fff, 0x0000_ffff, 0x0001_ffff, 0x0003_ffff, 0x0007_ffff, 0x000f_ffff,
-        0x001f_ffff, 0x003f_ffff, 0x007f_ffff, 0x00ff_ffff, 0x01ff_ffff, 0x03ff_ffff, 0x07ff_ffff,
-        0x0fff_ffff, 0x1fff_ffff, 0x3fff_ffff, 0x7fff_ffff, 0xffff_ffff
-    ];
+    pub fn mask(&self, bits: u32) -> u32 { (1 << bits) - 1 }
 
     pub fn get(&self, field: &Field, inst: u32) -> u32 {
-        // Use lookup table to retrieve precomputed mask
-        let mask = Um::MASKS[field.width as usize];
-        (inst >> field.lsb) & mask
+        (inst >> field.lsb) & self.mask(field.width)
     }
 
     pub fn execute (&mut self, inst: u32){
