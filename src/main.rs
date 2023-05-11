@@ -8,7 +8,7 @@ fn main() {
         //println!("{} instructions", instructions.len());
         let mut um = execute::Um::new();
         um.mem_segs.push(instructions.clone());
-        while true {
+        loop {
             
             um.execute(um.mem_segs[0][um.program_counter as usize]);
             //print!("total intstructions: {}", um.program_counter);
