@@ -25,27 +25,25 @@ pub fn load(input: Option<&str>) -> Vec<u32> {
     };
 
     let mut instructions = Vec::new();
-    let mut chunk = [0; 4096];
+    let mut buffer = [0u8; 4];
     loop {
-        match buf_reader.read(&mut chunk) {
-            Ok(0) => {
-                // End of file reached
-                break;
-            }
-            Ok(n) => {
-                // Read n bytes from the file
-                for i in (0..n).step_by(4) {
-                    instructions.push(u32::from_be_bytes(chunk[i..i+4].try_into().unwrap()));
-                }
+        match buf_reader.read_exact(&mut buffer) {
+            Ok(()) => {
+                instructions.push(u32::from_be_bytes(buffer));
             }
             Err(e) => {
-                panic!("Error reading input file: {}", e);
+                if e.kind() == std::io::ErrorKind::UnexpectedEof {
+                    break;
+                } else {
+                    panic!("Error reading input file: {}", e);
+                }
             }
         }
     }
 
     instructions
 }
+
 /* pub fn load(input: Option<&str>) -> Vec<u32> {
     let mut buf_reader: Box<dyn std::io::BufRead> = match input {
         None => Box::new(std::io::BufReader::new(std::io::stdin())),
