@@ -26,6 +26,7 @@ pub fn seg_store(umi: &mut Um, a:u32, b: u32, c: u32){
     //println!("seg store");
     //eprintln!("storing {} into segment {} offset at {}", umi.regs[c as usize], umi.regs[b as usize], umi.regs[c as usize]);
     umi.mem_segs[umi.regs[a as usize] as usize][umi.regs[b as usize] as usize] = umi.regs[c as usize];
+    
     umi.program_counter += 1;
     umi.inst_counter += 1;
 }
