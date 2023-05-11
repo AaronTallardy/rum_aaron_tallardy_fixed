@@ -22,8 +22,10 @@ pub fn seg_load(umi: &mut Um, a: u32, b: u32, c: u32){
     let a_reg = a as usize;
 
     umi.regs[a_reg] = mem_segs[b_val][c_val]; */
-
-    umi.regs[a as usize] = umi.mem_segs[umi.regs[b as usize] as usize][umi.regs[c as usize] as usize];
+    let a_u = a as usize;
+    let b_u = b as usize;
+    let c_u = c as usize;
+    umi.regs[a_u] = umi.mem_segs[umi.regs[b_u] as usize][umi.regs[c_u] as usize];
     umi.program_counter += 1;
     umi.inst_counter += 1;
 }
